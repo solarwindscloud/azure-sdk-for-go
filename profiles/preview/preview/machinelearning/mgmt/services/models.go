@@ -22,32 +22,50 @@ package services
 import (
 	"context"
 
-	original "github.com/Azure/azure-sdk-for-go/services/preview/machinelearning/mgmt/2018-03-01-preview/services"
+	original "github.com/Azure/azure-sdk-for-go/services/preview/machinelearning/mgmt/2018-11-19/services"
 )
 
 const (
 	DefaultBaseURI = original.DefaultBaseURI
 )
 
+type AllocationState = original.AllocationState
+
+const (
+	Resizing AllocationState = original.Resizing
+	Steady   AllocationState = original.Steady
+)
+
 type ComputeType = original.ComputeType
 
 const (
-	ComputeTypeAKS            ComputeType = original.ComputeTypeAKS
-	ComputeTypeBatchAI        ComputeType = original.ComputeTypeBatchAI
-	ComputeTypeDataFactory    ComputeType = original.ComputeTypeDataFactory
-	ComputeTypeHDInsight      ComputeType = original.ComputeTypeHDInsight
-	ComputeTypeVirtualMachine ComputeType = original.ComputeTypeVirtualMachine
+	ComputeTypeAKS               ComputeType = original.ComputeTypeAKS
+	ComputeTypeAmlCompute        ComputeType = original.ComputeTypeAmlCompute
+	ComputeTypeDatabricks        ComputeType = original.ComputeTypeDatabricks
+	ComputeTypeDataFactory       ComputeType = original.ComputeTypeDataFactory
+	ComputeTypeDataLakeAnalytics ComputeType = original.ComputeTypeDataLakeAnalytics
+	ComputeTypeHDInsight         ComputeType = original.ComputeTypeHDInsight
+	ComputeTypeVirtualMachine    ComputeType = original.ComputeTypeVirtualMachine
 )
 
 type ComputeTypeBasicCompute = original.ComputeTypeBasicCompute
 
 const (
-	ComputeTypeAKS1            ComputeTypeBasicCompute = original.ComputeTypeAKS1
-	ComputeTypeBatchAI1        ComputeTypeBasicCompute = original.ComputeTypeBatchAI1
-	ComputeTypeCompute         ComputeTypeBasicCompute = original.ComputeTypeCompute
-	ComputeTypeDataFactory1    ComputeTypeBasicCompute = original.ComputeTypeDataFactory1
-	ComputeTypeHDInsight1      ComputeTypeBasicCompute = original.ComputeTypeHDInsight1
-	ComputeTypeVirtualMachine1 ComputeTypeBasicCompute = original.ComputeTypeVirtualMachine1
+	ComputeTypeAKS1               ComputeTypeBasicCompute = original.ComputeTypeAKS1
+	ComputeTypeAmlCompute1        ComputeTypeBasicCompute = original.ComputeTypeAmlCompute1
+	ComputeTypeCompute            ComputeTypeBasicCompute = original.ComputeTypeCompute
+	ComputeTypeDatabricks1        ComputeTypeBasicCompute = original.ComputeTypeDatabricks1
+	ComputeTypeDataFactory1       ComputeTypeBasicCompute = original.ComputeTypeDataFactory1
+	ComputeTypeDataLakeAnalytics1 ComputeTypeBasicCompute = original.ComputeTypeDataLakeAnalytics1
+	ComputeTypeHDInsight1         ComputeTypeBasicCompute = original.ComputeTypeHDInsight1
+	ComputeTypeVirtualMachine1    ComputeTypeBasicCompute = original.ComputeTypeVirtualMachine1
+)
+
+type ComputeTypeBasicComputeNodesInformation = original.ComputeTypeBasicComputeNodesInformation
+
+const (
+	ComputeTypeBasicComputeNodesInformationComputeTypeAmlCompute              ComputeTypeBasicComputeNodesInformation = original.ComputeTypeBasicComputeNodesInformationComputeTypeAmlCompute
+	ComputeTypeBasicComputeNodesInformationComputeTypeComputeNodesInformation ComputeTypeBasicComputeNodesInformation = original.ComputeTypeBasicComputeNodesInformationComputeTypeComputeNodesInformation
 )
 
 type ComputeTypeBasicComputeSecrets = original.ComputeTypeBasicComputeSecrets
@@ -55,6 +73,7 @@ type ComputeTypeBasicComputeSecrets = original.ComputeTypeBasicComputeSecrets
 const (
 	ComputeTypeBasicComputeSecretsComputeTypeAKS            ComputeTypeBasicComputeSecrets = original.ComputeTypeBasicComputeSecretsComputeTypeAKS
 	ComputeTypeBasicComputeSecretsComputeTypeComputeSecrets ComputeTypeBasicComputeSecrets = original.ComputeTypeBasicComputeSecretsComputeTypeComputeSecrets
+	ComputeTypeBasicComputeSecretsComputeTypeDatabricks     ComputeTypeBasicComputeSecrets = original.ComputeTypeBasicComputeSecretsComputeTypeDatabricks
 	ComputeTypeBasicComputeSecretsComputeTypeVirtualMachine ComputeTypeBasicComputeSecrets = original.ComputeTypeBasicComputeSecretsComputeTypeVirtualMachine
 )
 
@@ -83,30 +102,70 @@ const (
 	Enabled  Status = original.Enabled
 )
 
+type UnderlyingResourceAction = original.UnderlyingResourceAction
+
+const (
+	Delete UnderlyingResourceAction = original.Delete
+	Detach UnderlyingResourceAction = original.Detach
+)
+
+type UsageUnit = original.UsageUnit
+
+const (
+	Count UsageUnit = original.Count
+)
+
+type VMPriority = original.VMPriority
+
+const (
+	Dedicated   VMPriority = original.Dedicated
+	LowPriority VMPriority = original.LowPriority
+)
+
 type AKS = original.AKS
 type AKSProperties = original.AKSProperties
 type AksComputeSecrets = original.AksComputeSecrets
+type AksNetworkingConfiguration = original.AksNetworkingConfiguration
+type AmlCompute = original.AmlCompute
+type AmlComputeNodeInformation = original.AmlComputeNodeInformation
+type AmlComputeNodesInformation = original.AmlComputeNodesInformation
+type AmlComputeProperties = original.AmlComputeProperties
 type BaseClient = original.BaseClient
 type BasicCompute = original.BasicCompute
+type BasicComputeNodesInformation = original.BasicComputeNodesInformation
 type BasicComputeSecrets = original.BasicComputeSecrets
-type BatchAI = original.BatchAI
-type BatchAIProperties = original.BatchAIProperties
+type ClusterUpdateParameters = original.ClusterUpdateParameters
+type ClusterUpdateProperties = original.ClusterUpdateProperties
 type Compute = original.Compute
+type ComputeNodesInformation = original.ComputeNodesInformation
+type ComputeNodesInformationModel = original.ComputeNodesInformationModel
 type ComputeResource = original.ComputeResource
 type ComputeSecrets = original.ComputeSecrets
 type ComputeSecretsModel = original.ComputeSecretsModel
 type DataFactory = original.DataFactory
+type DataLakeAnalytics = original.DataLakeAnalytics
+type DataLakeAnalyticsProperties = original.DataLakeAnalyticsProperties
+type Databricks = original.Databricks
+type DatabricksComputeSecrets = original.DatabricksComputeSecrets
+type DatabricksProperties = original.DatabricksProperties
 type ErrorDetail = original.ErrorDetail
 type ErrorResponse = original.ErrorResponse
 type HDInsight = original.HDInsight
 type HDInsightProperties = original.HDInsightProperties
 type Identity = original.Identity
+type ListUsagesByVMFamilyResult = original.ListUsagesByVMFamilyResult
+type ListUsagesByVMFamilyResultIterator = original.ListUsagesByVMFamilyResultIterator
+type ListUsagesByVMFamilyResultPage = original.ListUsagesByVMFamilyResultPage
+type ListUsagesResult = original.ListUsagesResult
+type ListUsagesResultIterator = original.ListUsagesResultIterator
+type ListUsagesResultPage = original.ListUsagesResultPage
 type ListWorkspaceKeysResult = original.ListWorkspaceKeysResult
 type MachineLearningComputeClient = original.MachineLearningComputeClient
 type MachineLearningComputeCreateOrUpdateFuture = original.MachineLearningComputeCreateOrUpdateFuture
 type MachineLearningComputeDeleteFuture = original.MachineLearningComputeDeleteFuture
-type MachineLearningComputeSystemUpdateFuture = original.MachineLearningComputeSystemUpdateFuture
+type MachineLearningComputeUpdateFuture = original.MachineLearningComputeUpdateFuture
 type MachineLearningServiceError = original.MachineLearningServiceError
+type NodeStateCounts = original.NodeStateCounts
 type Operation = original.Operation
 type OperationDisplay = original.OperationDisplay
 type OperationListResult = original.OperationListResult
@@ -118,13 +177,24 @@ type Password = original.Password
 type PrincipalCredentials = original.PrincipalCredentials
 type RegistryListCredentialsResult = original.RegistryListCredentialsResult
 type Resource = original.Resource
+type ResourceID = original.ResourceID
 type ScaleSettings = original.ScaleSettings
 type SslConfiguration = original.SslConfiguration
 type SystemService = original.SystemService
+type Usage = original.Usage
+type UsageByVMFamily = original.UsageByVMFamily
+type UsageByVMFamilyProperties = original.UsageByVMFamilyProperties
+type UsageName = original.UsageName
+type UsagesByVMFamilyClient = original.UsagesByVMFamilyClient
+type UsagesClient = original.UsagesClient
+type UserAccountCredentials = original.UserAccountCredentials
 type VirtualMachine = original.VirtualMachine
 type VirtualMachineProperties = original.VirtualMachineProperties
 type VirtualMachineSSHCredentials = original.VirtualMachineSSHCredentials
 type VirtualMachineSecrets = original.VirtualMachineSecrets
+type VirtualMachineSize = original.VirtualMachineSize
+type VirtualMachineSizeListResult = original.VirtualMachineSizeListResult
+type VirtualMachineSizesClient = original.VirtualMachineSizesClient
 type Workspace = original.Workspace
 type WorkspaceListResult = original.WorkspaceListResult
 type WorkspaceListResultIterator = original.WorkspaceListResultIterator
@@ -136,6 +206,18 @@ type WorkspacesClient = original.WorkspacesClient
 
 func New(subscriptionID string) BaseClient {
 	return original.New(subscriptionID)
+}
+func NewListUsagesByVMFamilyResultIterator(page ListUsagesByVMFamilyResultPage) ListUsagesByVMFamilyResultIterator {
+	return original.NewListUsagesByVMFamilyResultIterator(page)
+}
+func NewListUsagesByVMFamilyResultPage(getNextPage func(context.Context, ListUsagesByVMFamilyResult) (ListUsagesByVMFamilyResult, error)) ListUsagesByVMFamilyResultPage {
+	return original.NewListUsagesByVMFamilyResultPage(getNextPage)
+}
+func NewListUsagesResultIterator(page ListUsagesResultPage) ListUsagesResultIterator {
+	return original.NewListUsagesResultIterator(page)
+}
+func NewListUsagesResultPage(getNextPage func(context.Context, ListUsagesResult) (ListUsagesResult, error)) ListUsagesResultPage {
+	return original.NewListUsagesResultPage(getNextPage)
 }
 func NewMachineLearningComputeClient(subscriptionID string) MachineLearningComputeClient {
 	return original.NewMachineLearningComputeClient(subscriptionID)
@@ -155,6 +237,24 @@ func NewPaginatedComputeResourcesListIterator(page PaginatedComputeResourcesList
 func NewPaginatedComputeResourcesListPage(getNextPage func(context.Context, PaginatedComputeResourcesList) (PaginatedComputeResourcesList, error)) PaginatedComputeResourcesListPage {
 	return original.NewPaginatedComputeResourcesListPage(getNextPage)
 }
+func NewUsagesByVMFamilyClient(subscriptionID string) UsagesByVMFamilyClient {
+	return original.NewUsagesByVMFamilyClient(subscriptionID)
+}
+func NewUsagesByVMFamilyClientWithBaseURI(baseURI string, subscriptionID string) UsagesByVMFamilyClient {
+	return original.NewUsagesByVMFamilyClientWithBaseURI(baseURI, subscriptionID)
+}
+func NewUsagesClient(subscriptionID string) UsagesClient {
+	return original.NewUsagesClient(subscriptionID)
+}
+func NewUsagesClientWithBaseURI(baseURI string, subscriptionID string) UsagesClient {
+	return original.NewUsagesClientWithBaseURI(baseURI, subscriptionID)
+}
+func NewVirtualMachineSizesClient(subscriptionID string) VirtualMachineSizesClient {
+	return original.NewVirtualMachineSizesClient(subscriptionID)
+}
+func NewVirtualMachineSizesClientWithBaseURI(baseURI string, subscriptionID string) VirtualMachineSizesClient {
+	return original.NewVirtualMachineSizesClientWithBaseURI(baseURI, subscriptionID)
+}
 func NewWithBaseURI(baseURI string, subscriptionID string) BaseClient {
 	return original.NewWithBaseURI(baseURI, subscriptionID)
 }
@@ -169,6 +269,12 @@ func NewWorkspacesClient(subscriptionID string) WorkspacesClient {
 }
 func NewWorkspacesClientWithBaseURI(baseURI string, subscriptionID string) WorkspacesClient {
 	return original.NewWorkspacesClientWithBaseURI(baseURI, subscriptionID)
+}
+func PossibleAllocationStateValues() []AllocationState {
+	return original.PossibleAllocationStateValues()
+}
+func PossibleComputeTypeBasicComputeNodesInformationValues() []ComputeTypeBasicComputeNodesInformation {
+	return original.PossibleComputeTypeBasicComputeNodesInformationValues()
 }
 func PossibleComputeTypeBasicComputeSecretsValues() []ComputeTypeBasicComputeSecrets {
 	return original.PossibleComputeTypeBasicComputeSecretsValues()
@@ -187,6 +293,15 @@ func PossibleResourceIdentityTypeValues() []ResourceIdentityType {
 }
 func PossibleStatusValues() []Status {
 	return original.PossibleStatusValues()
+}
+func PossibleUnderlyingResourceActionValues() []UnderlyingResourceAction {
+	return original.PossibleUnderlyingResourceActionValues()
+}
+func PossibleUsageUnitValues() []UsageUnit {
+	return original.PossibleUsageUnitValues()
+}
+func PossibleVMPriorityValues() []VMPriority {
+	return original.PossibleVMPriorityValues()
 }
 func UserAgent() string {
 	return original.UserAgent() + " profiles/preview"
