@@ -1411,18 +1411,6 @@ type DataLakeAnalyticsProperties struct {
 	DataLakeStoreAccountName *string `json:"dataLakeStoreAccountName,omitempty"`
 }
 
-// DummyObject describes AML Resource Usage.
-type DummyObject struct {
-	// Unit - READ-ONLY; An enum describing the unit of usage measurement. Possible values include: 'Count'
-	Unit UsageUnit `json:"unit,omitempty"`
-	// CurrentValue - READ-ONLY; The current usage of the resource.
-	CurrentValue *int64 `json:"currentValue,omitempty"`
-	// Limit - READ-ONLY; The maximum permitted usage of the resource.
-	Limit *int64 `json:"limit,omitempty"`
-	// Name - READ-ONLY; The name of the type of usage.
-	Name *UsageName `json:"name,omitempty"`
-}
-
 // ErrorDetail error detail information.
 type ErrorDetail struct {
 	// Code - Error code.

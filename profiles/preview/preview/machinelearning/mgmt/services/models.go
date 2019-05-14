@@ -148,7 +148,6 @@ type DataLakeAnalyticsProperties = original.DataLakeAnalyticsProperties
 type Databricks = original.Databricks
 type DatabricksComputeSecrets = original.DatabricksComputeSecrets
 type DatabricksProperties = original.DatabricksProperties
-type DummyObject = original.DummyObject
 type ErrorDetail = original.ErrorDetail
 type ErrorResponse = original.ErrorResponse
 type HDInsight = original.HDInsight
