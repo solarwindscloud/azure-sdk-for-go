@@ -1411,6 +1411,18 @@ type DataLakeAnalyticsProperties struct {
 	DataLakeStoreAccountName *string `json:"dataLakeStoreAccountName,omitempty"`
 }
 
+// DummyObject describes AML Resource Usage.
+type DummyObject struct {
+	// Unit - READ-ONLY; An enum describing the unit of usage measurement. Possible values include: 'Count'
+	Unit UsageUnit `json:"unit,omitempty"`
+	// CurrentValue - READ-ONLY; The current usage of the resource.
+	CurrentValue *int64 `json:"currentValue,omitempty"`
+	// Limit - READ-ONLY; The maximum permitted usage of the resource.
+	Limit *int64 `json:"limit,omitempty"`
+	// Name - READ-ONLY; The name of the type of usage.
+	Name *UsageName `json:"name,omitempty"`
+}
+
 // ErrorDetail error detail information.
 type ErrorDetail struct {
 	// Code - Error code.
@@ -2180,26 +2192,6 @@ type ResourceID struct {
 	ID *string `json:"id,omitempty"`
 }
 
-// ResourceUsage describes AML Resource Usage.
-type ResourceUsage struct {
-	// Unit - READ-ONLY; An enum describing the unit of usage measurement. Possible values include: 'Count'
-	Unit UsageUnit `json:"unit,omitempty"`
-	// CurrentValue - READ-ONLY; The current usage of the resource.
-	CurrentValue *int64 `json:"currentValue,omitempty"`
-	// Limit - READ-ONLY; The maximum permitted usage of the resource.
-	Limit *int64 `json:"limit,omitempty"`
-	// Name - READ-ONLY; The name of the type of usage.
-	Name *ResourceUsageName `json:"name,omitempty"`
-}
-
-// ResourceUsageName the Usage Names.
-type ResourceUsageName struct {
-	// Value - READ-ONLY; The name of the resource.
-	Value *string `json:"value,omitempty"`
-	// LocalizedValue - READ-ONLY; The localized name of the resource.
-	LocalizedValue *string `json:"localizedValue,omitempty"`
-}
-
 // ScaleSettings scale settings for AML Compute
 type ScaleSettings struct {
 	// MaxNodeCount - Max number of nodes to use
@@ -2256,7 +2248,7 @@ type UsageByVMFamily struct {
 	// Limit - READ-ONLY; The maximum permitted usage of the resource.
 	Limit *int64 `json:"limit,omitempty"`
 	// Name - READ-ONLY; The name of the type of usage.
-	Name *ResourceUsageName `json:"name,omitempty"`
+	Name *UsageName `json:"name,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for UsageByVMFamily.
@@ -2315,7 +2307,7 @@ func (ubvf *UsageByVMFamily) UnmarshalJSON(body []byte) error {
 			}
 		case "name":
 			if v != nil {
-				var name ResourceUsageName
+				var name UsageName
 				err = json.Unmarshal(*v, &name)
 				if err != nil {
 					return err
